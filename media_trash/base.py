@@ -223,6 +223,7 @@ class FileObject(object):
         self.filename_lower = self.filename.lower()
         self.filename_root, self.extension = os.path.splitext(self.filename)
         self.mimetype = mimetypes.guess_type(self.filename)
+        self.directory = storage.location
 
     def __str__(self):
         return force_text(self.path)
@@ -295,7 +296,7 @@ class FileObject(object):
     @property
     def path_relative_directory(self):
         """Path relative to directory"""
-        return path_strip(self.path, self.storage.directory)
+        return path_strip(self.path, self.directory)
 
     @property
     def path_full(self):
@@ -395,8 +396,8 @@ class FileObject(object):
         """Main directory for storing versions (either VERSIONS_BASEDIR or directory)"""
         if VERSIONS_BASEDIR:
             return VERSIONS_BASEDIR
-        elif self.storage.directory:
-            return self.storage.directory
+        elif self.directory:
+            return self.directory
         else:
             return ""
 
@@ -405,7 +406,7 @@ class FileObject(object):
         """Returns the original FileObject"""
         if self.is_version:
             relative_path = self.head.replace(self.versions_basedir, "").lstrip("/")
-            return FileObject(os.path.join(self.storage.directory, relative_path, self.original_filename),
+            return FileObject(os.path.join(self.directory, relative_path, self.original_filename),
                               storage=self.storage)
         return self
 
