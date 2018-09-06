@@ -58,7 +58,7 @@ class FileListing(object):
     _results_walk_total = None
 
     def __init__(self, path, filter_func=None, sorting_by=None, sorting_order=None, storage=None):
-        self.path = path
+        self.path = os.path.normpath(path)
         self.filter_func = filter_func
         self.sorting_by = sorting_by
         self.sorting_order = sorting_order
@@ -217,10 +217,7 @@ class FileObject(object):
 
     def __init__(self, path, storage=None):
         self.storage = storage
-        if platform.system() == 'Windows':
-            self.path = path.replace('\\', '/')
-        else:
-            self.path = path
+        self.path = os.path.normpath(path)
         self.head = os.path.dirname(path)
         self.filename = os.path.basename(path)
         self.filename_lower = self.filename.lower()
