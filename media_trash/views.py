@@ -1,11 +1,11 @@
 import os
+import urllib
 
 from django.shortcuts import render
 from django.views.generic import View
-from django.conf import settings as djsettings
+
 from . import settings
 from .base import FileListing, FileObject
-import urllib
 
 
 class MediaView(View):
@@ -16,8 +16,6 @@ class MediaView(View):
         self.file_listing = FileListing(settings.MEDIA_TRASH_PATH)
 
     def get(self, request, *args, **kwargs):
-
-
         context = {
             'files_walk': self.file_listing.files_walk_filtered()
         }
