@@ -288,6 +288,10 @@ class FileObject(object):
 
     def move(self, dst):
         """Move this file to another location"""
+        if not os.path.isdir(dst):
+            dstdir = os.path.dirname(dst)
+            if not os.path.isdir(dstdir):
+                os.makedirs(dstdir)
         file_move_safe(self.storage.path(self.path), dst,
                        allow_overwrite=True)
 

@@ -12,6 +12,9 @@ MEDIA_TRASH_MODEL = getattr(settings, 'MEDIA_TRASH_MODEL', None)
 if MEDIA_TRASH_MODEL is None:
     raise ImproperlyConfigured("trash model settings is required!")
 
+MEDIA_TRASH_RECOVER_DIR = getattr(settings, "MEDIA_TRASH_RECOVER_DIR",
+                                  settings.MEDIA_ROOT)
+
 # source taken from:
 # https://github.com/sehmaschine/django-filebrowser
 # ====================

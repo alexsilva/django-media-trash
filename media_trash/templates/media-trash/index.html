@@ -6,14 +6,18 @@
 {% block content %}
     <div class="container">
         <div class="jumbotron">
-            <table id="FileTable" class="table table-bordered table-condensed" style="width:100%">
-                <thead>
-                <tr>
-                    <th>Filename</th>
-                    <th></th>
-                </tr>
-                </thead>
+            <form action="" method="post" id="FileForm">
+                {% csrf_token %}
+                <input type="hidden" name="relpath">
+                <table id="FileTable" class="table table-bordered table-condensed" style="width:100%">
+                    <thead>
+                    <tr>
+                        <th>Filename</th>
+                        <th></th>
+                    </tr>
+                    </thead>
             </table>
+            </form>
         </div>
     </div>
 {% endblock %}
@@ -26,14 +30,21 @@
                 data: [
                     {% for fileobject in files_walk %}
                             {% if not fileobject.is_folder %}[
-                                '<a href="{{ fileobject.url }}">{{ fileobject.path_relative_directory }}</a>',
-                                '<button data-file="{{ fileobject.path_relative_directory }}">Restore</button>'
+                                '<a href="{{ fileobject.url }}">{{ fileobject.path_relative_directory|safe  }}</a>',
+                                '<button class="btn-form" data-file="{{ fileobject.path_relative_directory|iriencode  }}">Restore</button>'
                                 ]{% if not forloop.last %},{% endif %}
                             {% endif %}
                     {% endfor %}
-
                 ]
             });
+
+            $(".btn-form").click(function (e) {
+                e.preventDefault();
+                var $btn = $(this);
+                var $form = $("#FileForm");
+                $form.find("input[name='relpath']").val($btn.attr("data-file"));
+                $form.submit();
+            })
         });
     </script>
 {% endblock %}
