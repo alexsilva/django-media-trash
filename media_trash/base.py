@@ -295,7 +295,7 @@ class FileObject(object):
     @property
     def path_relative_directory(self):
         """Path relative to directory"""
-        return path_strip(self.path, self.directory)
+        return path_strip(self.path, self.storage.directory)
 
     @property
     def path_full(self):
@@ -395,8 +395,8 @@ class FileObject(object):
         """Main directory for storing versions (either VERSIONS_BASEDIR or directory)"""
         if VERSIONS_BASEDIR:
             return VERSIONS_BASEDIR
-        elif self.directory:
-            return self.directory
+        elif self.storage.directory:
+            return self.storage.directory
         else:
             return ""
 
@@ -405,7 +405,7 @@ class FileObject(object):
         """Returns the original FileObject"""
         if self.is_version:
             relative_path = self.head.replace(self.versions_basedir, "").lstrip("/")
-            return FileObject(os.path.join(self.directory, relative_path, self.original_filename),
+            return FileObject(os.path.join(self.storage.directory, relative_path, self.original_filename),
                               storage=self.storage)
         return self
 
