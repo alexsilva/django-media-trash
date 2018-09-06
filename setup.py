@@ -3,7 +3,7 @@ from setuptools import setup
 setup(
     name='django-media-trash',
     version='1.0',
-    packages=[''],
+    packages=['media_trash'],
     url='https://github.com/alexsilva/django-media-trash',
     license='MIT',
     author='alex',
