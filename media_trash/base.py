@@ -6,11 +6,11 @@
 import datetime
 import mimetypes
 import os
-import platform
 import tempfile
 import time
 
 from django.core.files import File
+from django.core.files.move import file_move_safe
 from django.utils.encoding import python_2_unicode_compatible, force_text
 from django.utils.functional import cached_property
 from django.utils.six import string_types
@@ -285,6 +285,11 @@ class FileObject(object):
     def exists(self):
         """True, if the path exists, False otherwise"""
         return self.storage.exists(self.path)
+
+    def move(self, dst):
+        """Move this file to another location"""
+        file_move_safe(self.storage.path(self.path), dst,
+                       allow_overwrite=True)
 
     # PATH/URL ATTRIBUTES/PROPERTIES
     # path (see init)
