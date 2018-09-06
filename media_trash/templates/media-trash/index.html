@@ -1,11 +1,39 @@
 {% extends 'media-trash/base.html' %}
-
+{% load staticfiles %}
+{% block extrahead %}
+    <link href="{% static 'media-trash/css/styles.css' %}" rel="stylesheet">
+{% endblock %}
 {% block content %}
+    <div class="container">
+        <div class="jumbotron">
+            <table id="FileTable" class="table table-bordered table-condensed" style="width:100%">
+                <thead>
+                <tr>
+                    <th>Filename</th>
+                    <th></th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+{% endblock %}
 
-    {% for item in file.files_walk_total %}
+{% block body-extra %}
+    {{ block.super }}
+    <script type="application/javascript">
+        $(function () {
+            $('#FileTable').DataTable({
+                data: [
+                    {% for fileobject in files_walk %}
+                            {% if not fileobject.is_folder %}[
+                                '<a href="{{ fileobject.url }}">{{ fileobject.path_relative_directory }}</a>',
+                                '<button data-file="{{ fileobject.path_relative_directory }}">Restore</button>'
+                                ]{% if not forloop.last %},{% endif %}
+                            {% endif %}
+                    {% endfor %}
 
-        <p>{{ item }}</p>
-        <p>{{ item.filesize }}</p>
-    {% endfor %}
-
+                ]
+            });
+        });
+    </script>
 {% endblock %}

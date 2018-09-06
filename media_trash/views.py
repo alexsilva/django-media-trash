@@ -11,6 +11,6 @@ class MediaView(View):
         flisting = FileListing(settings.MEDIA_TRASH_PATH)
 
         context = {
-            'file': flisting
+            'files_walk': flisting.files_walk_filtered()
         }
         return render(request, 'media-trash/index.html', context=context)

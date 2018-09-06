@@ -4,6 +4,7 @@ from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 from django.utils.translation import ugettext_lazy as _
 
+MEDIA_TRASH_URL = getattr(settings, "MEDIA_TRASH_URL", '/media/trash/')
 MEDIA_TRASH_PATH = getattr(settings,
                            'MEDIA_TRASH_PATH',
                            os.path.abspath(os.path.join(settings.MEDIA_ROOT, '..', 'trash')))

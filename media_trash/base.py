@@ -18,7 +18,7 @@ from django.utils.six import string_types
 from media_trash.storage import FileSystemStorage
 from .namers import get_namer
 from .settings import EXTENSIONS, VERSIONS, ADMIN_VERSIONS, VERSIONS_BASEDIR, VERSION_QUALITY, STRICT_PIL, \
-    IMAGE_MAXBLOCK, DEFAULT_PERMISSIONS
+    IMAGE_MAXBLOCK, DEFAULT_PERMISSIONS, MEDIA_TRASH_URL
 from .utils import path_strip, process_image, get_modified_time
 
 if STRICT_PIL:
@@ -63,7 +63,7 @@ class FileListing(object):
         self.sorting_by = sorting_by
         self.sorting_order = sorting_order
         if not storage:
-            storage = FileSystemStorage(self.path)
+            storage = FileSystemStorage(self.path, base_url=MEDIA_TRASH_URL)
         self.storage = storage
         self.directory = path
 
