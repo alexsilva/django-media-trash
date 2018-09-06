@@ -1,6 +1,7 @@
 import os
 import urllib
 
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.views.generic import View
 
@@ -32,4 +33,4 @@ class MediaView(View):
             filepath = os.path.join(settings.MEDIA_TRASH_RECOVER_DIR, fileobject.path_relative_directory)
             fileobject.move(filepath)
 
-        return self.get(request, *args, **kwargs)
+        return HttpResponseRedirect(request.path)

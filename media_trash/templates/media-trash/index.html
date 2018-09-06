@@ -31,7 +31,7 @@
                     {% for fileobject in files_walk %}
                             {% if not fileobject.is_folder %}[
                                 '<a href="{{ fileobject.url }}">{{ fileobject.path_relative_directory|safe  }}</a>',
-                                '<button class="btn-form" data-file="{{ fileobject.path_relative_directory|iriencode  }}">Restore</button>'
+                                '<button class="btn-form btn btn-primary" data-file="{{ fileobject.path_relative_directory|iriencode  }}">Restore</button>'
                                 ]{% if not forloop.last %},{% endif %}
                             {% endif %}
                     {% endfor %}
