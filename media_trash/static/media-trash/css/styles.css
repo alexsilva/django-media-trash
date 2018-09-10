@@ -7,3 +7,11 @@ img.Image {
     margin-left: auto;
     margin-right: auto;
 }
+
+h1.loader {
+  height: 50%;
+  width: 100%;
+  text-align: center;
+  font-size: 4em;
+  display: none;
+}

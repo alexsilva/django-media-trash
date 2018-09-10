@@ -73,10 +73,15 @@
                     $img.attr("class", $a.attr('class'));
                     $img.attr("src", $a.attr("href"));
                     $img.attr("alt", $a.text());
-                    var $body = $modal.find(".modal-body");
-                    $body.empty();
-                    $body.append($img);
+                    var $container = $modal.find(".modal-image");
+                    var $loader = $container.find("h1.loader");
+                    $loader.show();
+                    $img.on('load', function (e) {
+                        $loader.hide();
+                    });
+                    $container.children().not("h1, i").remove();
                     $modal.modal("show");
+                    $container.append($img);
                 })
             })
         });
