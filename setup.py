@@ -5,6 +5,7 @@ setup(
     version='1.0',
     packages=['media_trash',
               'media_trash.management',
+              'media_trash.management.commands',
               'media_trash.templatetags'],
     url='https://github.com/alexsilva/django-media-trash',
     license='MIT',
