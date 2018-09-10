@@ -1,5 +1,5 @@
 {% extends 'media-trash/base.html' %}
-{% load staticfiles %}
+{% load staticfiles %}{% load i18n %}
 {% block extrahead %}
     <link href="{% static 'media-trash/css/styles.css' %}" rel="stylesheet">
 {% endblock %}
@@ -35,7 +35,10 @@
                                 ]{% if not forloop.last %},{% endif %}
                             {% endif %}
                     {% endfor %}
-                ]
+                ],
+                "language": {
+                    "url": "{% static 'media-trash/js/datatable-i18n/' %}{{ LANGUAGE_CODE|default:"en" }}.json"
+                }
             });
 
             $(".btn-form").click(function (e) {
