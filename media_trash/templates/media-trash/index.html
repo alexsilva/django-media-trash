@@ -14,6 +14,14 @@
                     {% endfor %}
                 {% endif %}
             {% endblock %}
+            {% if back_url %}
+            <div class="well well-sm">
+                <button class="btn btn-default btn-md" onclick="window.location='{{ back_url }}'">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    {% trans 'Return'%}
+                </button>
+            </div>
+            {% endif %}
             <form action="" method="post" id="FileForm">
                 {% csrf_token %}
                 <input type="hidden" name="relpath">

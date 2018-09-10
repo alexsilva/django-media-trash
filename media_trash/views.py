@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.template.loader import render_to_string
+from django.utils.module_loading import import_string
 from django.views.generic import View
 
 from . import settings
@@ -20,8 +21,11 @@ class MediaView(View):
 
     def get(self, request, *args, **kwargs):
         context = {
-            'files_walk': self.file_listing.files_walk_filtered()
+            'files_walk': self.file_listing.files_walk_filtered(),
         }
+        if isinstance(settings.MEDIA_TRASH_GET_BACK_URL, basestring):
+            context['back_url'] = import_string(settings.MEDIA_TRASH_GET_BACK_URL)(request, **kwargs)
+
         return render(request, 'media-trash/index.html', context=context)
 
     def post(self, request, *args, **kwargs):
