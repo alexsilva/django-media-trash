@@ -26,6 +26,9 @@ class MediaView(View):
         if isinstance(settings.MEDIA_TRASH_GET_BACK_URL, basestring):
             context['back_url'] = import_string(settings.MEDIA_TRASH_GET_BACK_URL)(request, **kwargs)
 
+        if settings.MEDIA_TRASH_BUTTON_BACK_TITLE:
+            context['return_button_title'] = settings.MEDIA_TRASH_BUTTON_BACK_TITLE
+
         return render(request, 'media-trash/index.html', context=context)
 
     def post(self, request, *args, **kwargs):

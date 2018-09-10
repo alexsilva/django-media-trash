@@ -16,6 +16,7 @@ MEDIA_TRASH_RECOVER_DIR = getattr(settings, "MEDIA_TRASH_RECOVER_DIR",
                                   settings.MEDIA_ROOT)
 
 MEDIA_TRASH_GET_BACK_URL = getattr(settings, "MEDIA_TRASH_GET_BACK_URL", None)
+MEDIA_TRASH_BUTTON_BACK_TITLE = getattr(settings, "MEDIA_TRASH_BUTTON_BACK_TITLE", None)
 
 # source taken from:
 # https://github.com/sehmaschine/django-filebrowser
