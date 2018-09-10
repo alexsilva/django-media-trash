@@ -26,7 +26,7 @@
     {{ block.super }}
     <script type="application/javascript">
         $(function () {
-            $('#FileTable').DataTable({
+            var table = $('#FileTable').DataTable({
                 data: [
                     {% for fileobject in files_walk %}
                             {% if not fileobject.is_folder %}[
@@ -40,13 +40,14 @@
                     "url": "{% static 'media-trash/js/datatable-i18n/' %}{{ LANGUAGE_CODE|default:"en" }}.json"
                 }
             });
-
-            $(".btn-form").click(function (e) {
-                e.preventDefault();
-                var $btn = $(this);
-                var $form = $("#FileForm");
-                $form.find("input[name='relpath']").val($btn.attr("data-file"));
-                $form.submit();
+            table.on('draw.dt', function () {
+                $(".btn-form").unbind('click').click(function (e) {
+                    e.preventDefault();
+                    var $btn = $(this);
+                    var $form = $("#FileForm");
+                    $form.find("input[name='relpath']").val($btn.attr("data-file"));
+                    $form.submit();
+                })
             })
         });
     </script>
