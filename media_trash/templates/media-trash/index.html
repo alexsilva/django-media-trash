@@ -36,6 +36,7 @@
             </form>
         </div>
     </div>
+    {% include 'media-trash/image-modal.html' %}
 {% endblock %}
 
 {% block body-extra %}
@@ -63,6 +64,19 @@
                     var $form = $("#FileForm");
                     $form.find("input[name='relpath']").val($btn.attr("data-file"));
                     $form.submit();
+                });
+                $("a.Image").unbind("click").click(function (e) {
+                    e.preventDefault();
+                    var $a = $(this);
+                    var $modal = $("#FileModal");
+                    var $img = $("<img/>");
+                    $img.attr("class", $a.attr('class'));
+                    $img.attr("src", $a.attr("href"));
+                    $img.attr("alt", $a.text());
+                    var $body = $modal.find(".modal-body");
+                    $body.empty();
+                    $body.append($img);
+                    $modal.modal("show");
                 })
             })
         });
