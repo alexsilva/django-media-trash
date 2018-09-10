@@ -38,9 +38,7 @@
                 data: [
                     {% for fileobject in files_walk %}
                             {% if not fileobject.is_folder %}[
-                                '<a href="{{ fileobject.url }}" {% if fileobject.filetype %}class="
-                                    {{ fileobject.filetype }}
-                                    "{% endif %}>{{ fileobject.path_relative_directory|safe|sep_replace }}</a>',
+                                '<a href="{{ fileobject.url }}" {% if fileobject.filetype %}class="{{ fileobject.filetype }}"{% endif %}>{{ fileobject.path_relative_directory|safe|sep_replace }}</a>',
                                 '<button class="btn-form btn btn-primary" data-file="{{ fileobject.path_relative_directory|iriencode  }}">{% trans "Restore" %}</button>'
                                 ]{% if not forloop.last %},{% endif %}
                             {% endif %}
