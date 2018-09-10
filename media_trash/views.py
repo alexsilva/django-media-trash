@@ -1,8 +1,10 @@
 import os
 import urllib
 
+from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
+from django.template.loader import render_to_string
 from django.views.generic import View
 
 from . import settings
@@ -31,6 +33,14 @@ class MediaView(View):
 
         if fileobject.exists:
             filepath = os.path.join(settings.MEDIA_TRASH_RECOVER_DIR, fileobject.path_relative_directory)
-            fileobject.move(filepath)
-
+            try:
+                fileobject.move(filepath)
+                messages.success(request, render_to_string('media-trash/restore-success.html', context=dict(
+                    filepath=relpath
+                )))
+            except Exception as exc:
+                messages.error(request, render_to_string('media-trash/restore-error.html', context=dict(
+                    filepath=relpath,
+                    exc=exc
+                )))
         return HttpResponseRedirect(request.path)

@@ -6,6 +6,13 @@
 {% block content %}
     <div class="container">
         <div class="jumbotron">
+            {% block messages %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <div{% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endblock %}
             <form action="" method="post" id="FileForm">
                 {% csrf_token %}
                 <input type="hidden" name="relpath">
@@ -16,7 +23,7 @@
                         <th></th>
                     </tr>
                     </thead>
-            </table>
+                </table>
             </form>
         </div>
     </div>
