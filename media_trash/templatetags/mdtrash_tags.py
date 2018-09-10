@@ -11,3 +11,8 @@ register = template.Library()
 def sep_replace(path):
     """replace value from s"""
     return path.replace(os.sep, "/")
+
+
+@register.assignment_tag
+def get_bootstrap_alert_tags(tags):
+    return 'danger' if tags == 'error' else tags

@@ -9,7 +9,8 @@
             {% block messages %}
                 {% if messages %}
                     {% for message in messages %}
-                        <div{% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>{{ message }}</div>
+                        {% get_bootstrap_alert_tags message.tags as alert_tags %}
+                        <div{% if message.tags %} class="alert alert-{{ alert_tags }}"{% endif %}>{{ message }}</div>
                     {% endfor %}
                 {% endif %}
             {% endblock %}
