@@ -11,6 +11,7 @@ import time
 
 from django.core.files import File
 from django.core.files.move import file_move_safe
+from django.utils import timezone
 from django.utils.encoding import python_2_unicode_compatible, force_text
 from django.utils.functional import cached_property
 from django.utils.six import string_types
@@ -286,12 +287,19 @@ class FileObject(object):
         """True, if the path exists, False otherwise"""
         return self.storage.exists(self.path)
 
-    def move(self, dst):
+    def move(self, dst, replace=False):
         """Move this file to another location"""
-        if not os.path.isdir(dst):
-            dstdir = os.path.dirname(dst)
-            if not os.path.isdir(dstdir):
-                os.makedirs(dstdir)
+        dstdir = os.path.dirname(dst)
+
+        if not os.path.isdir(dstdir):
+            os.makedirs(dstdir)
+
+        # The file already exists, so we need to avoid name conflict.
+        if not replace and os.path.isfile(dst):
+            filename = os.path.basename(dst)
+            fname, ext = os.path.splitext(filename)
+            dst = os.path.join(dstdir, fname.rstrip("-") + timezone.now().strftime("-%Y-%m-%d-%H%M%S") + ext)
+
         file_move_safe(self.storage.path(self.path), dst,
                        allow_overwrite=True)
 
