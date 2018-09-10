@@ -8,6 +8,8 @@ MEDIA_TRASH_URL = getattr(settings, "MEDIA_TRASH_URL", '/media/trash/')
 MEDIA_TRASH_PATH = getattr(settings,
                            'MEDIA_TRASH_PATH',
                            os.path.abspath(os.path.join(settings.MEDIA_ROOT, '..', 'trash')))
+MEDIA_TRASH_LOGIN_URL = getattr(settings, 'MEDIA_TRASH_LOGIN_URL',
+                                settings.LOGIN_URL)
 MEDIA_TRASH_MODEL = getattr(settings, 'MEDIA_TRASH_MODEL', None)
 if MEDIA_TRASH_MODEL is None:
     raise ImproperlyConfigured("trash model settings is required!")
