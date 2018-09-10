@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-10 15:59-0300\n"
+"POT-Creation-Date: 2018-09-10 17:31-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,25 +18,29 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: .\settings.py:130
+#: .\settings.py:133
 msgid "Folder"
 msgstr "Diretório"
 
-#: .\settings.py:131
+#: .\settings.py:134 .\templates\media-trash\image-modal.html:9
 msgid "Image"
 msgstr "Imagem"
 
-#: .\settings.py:132
+#: .\settings.py:135
 msgid "Video"
 msgstr "Vídeo"
 
-#: .\settings.py:133
+#: .\settings.py:136
 msgid "Document"
 msgstr "Documento"
 
-#: .\settings.py:134
+#: .\settings.py:137
 msgid "Audio"
 msgstr "Áudio"
+
+#: .\templates\media-trash\image-modal.html:18
+msgid "Close"
+msgstr "Fechar"
 
 #: .\templates\media-trash\index.html:21
 msgid "Return"
@@ -46,7 +50,7 @@ msgstr "Retornar"
 msgid "Filename"
 msgstr "Arquivo"
 
-#: .\templates\media-trash\index.html:50
+#: .\templates\media-trash\index.html:51
 msgid "Restore"
 msgstr "Restaurar"
 
