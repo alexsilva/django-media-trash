@@ -328,7 +328,7 @@ class FileObject(object):
     @property
     def url(self):
         """URL for the file/folder as defined with storage"""
-        return self.storage.url(self.path)
+        return self.storage.url(self.path_relative_directory)
 
     # IMAGE ATTRIBUTES/PROPERTIES
     # dimensions
