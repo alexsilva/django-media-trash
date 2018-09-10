@@ -8,5 +8,6 @@ setup(
     license='MIT',
     author='alex',
     author_email='alex@fabricadigital.com.br',
-    description='Django app to move media files to a recycle bin and restore when needed.'
+    description='Django app to move media files to a recycle bin and restore when needed.',
+    include_package_data=True
 )
