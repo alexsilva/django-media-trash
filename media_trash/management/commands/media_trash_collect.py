@@ -6,7 +6,7 @@ from django.apps import apps
 from django.core.files.move import file_move_safe
 from django.core.management import BaseCommand
 
-from ... import settings
+from ... import settings, signals
 
 
 class Command(BaseCommand):
@@ -62,3 +62,6 @@ class Command(BaseCommand):
                     shutil.rmtree(srcdir)
                 except OSError:
                     pass
+        # send signal after processing
+        if objs.exists():
+            signals.trash_collected.send(sender=self.__class__)
