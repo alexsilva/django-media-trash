@@ -51,7 +51,7 @@ class Command(BaseCommand):
                 file_move_safe(src, dst, allow_overwrite=True)
             except OSError:
                 # Avoid hide the error.
-                print traceback.format_exc()
+                print(traceback.format_exc())
                 continue
 
             media.delete()
