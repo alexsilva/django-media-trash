@@ -14,7 +14,6 @@ from django.core.files.move import file_move_safe
 from django.utils import timezone
 from django.utils.encoding import force_text
 from django.utils.functional import cached_property
-from django.utils.six import string_types
 
 from media_trash.storage import FileSystemStorage
 from .namers import get_namer
@@ -83,7 +82,7 @@ class FileListing(object):
         the sorted list of objects.
         """
         from operator import attrgetter
-        if isinstance(attr, string_types):  # Backward compatibility hack
+        if isinstance(attr, (str, bytes)):  # Backward compatibility hack
             attr = (attr,)
         return sorted(seq, key=attrgetter(*attr))
 

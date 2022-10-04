@@ -5,8 +5,6 @@
 from __future__ import unicode_literals
 
 import re
-
-from django.utils import six
 from django.utils.encoding import force_text
 from django.utils.module_loading import import_string
 
@@ -91,11 +89,8 @@ class OptionsNamer(VersionNamer):
             if v is True:
                 opts.append(k)
                 continue
-            if not isinstance(v, six.string_types):
-                try:
-                    v = 'x'.join([six.text_type(item) for item in v])
-                except TypeError:
-                    v = six.text_type(v)
+            if not isinstance(v, str):
+                v = 'x'.join([str(item) for item in v])
             opts.append('%s-%s' % (k, v))
 
         return opts
