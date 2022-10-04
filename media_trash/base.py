@@ -12,7 +12,7 @@ import time
 from django.core.files import File
 from django.core.files.move import file_move_safe
 from django.utils import timezone
-from django.utils.encoding import python_2_unicode_compatible, force_text
+from django.utils.encoding import force_text
 from django.utils.functional import cached_property
 from django.utils.six import string_types
 
@@ -203,7 +203,6 @@ class FileListing(object):
         return len(self.files_walk_filtered())
 
 
-@python_2_unicode_compatible
 class FileObject(object):
     """
     The FileObject represents a file (or directory) on the server.
