@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='django-media-trash',
-    version='2.1',
+    version='2.2',
     packages=['media_trash',
               'media_trash.management',
               'media_trash.management.commands',
